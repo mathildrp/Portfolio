@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | MATHIIIILDE</title>
+    <style>
+        /* --- RESET ET STYLES GÉNÉRAUX --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f6e096;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: #ef8f09;
+        }
+        
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 40px;
+        }
+        
+        nav ul li a {
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        /* --- SECTION HERO --- */
+        .hero {
+            height: 100vh;
+            background-image: url('/api/placeholder/1600/1000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid #fff;
+            color: #fff;
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #fff;
+            color: #333;
+        }
+        
+        /* --- SECTION À PROPOS --- */
+        .about {
+            padding: 120px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        /* --- SECTION PORTFOLIO --- */
+        .portfolio {
+            padding: 80px 30px;
+            background-color: #f8f8f8;
+        }
+        
+        .portfolio-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 16px;
+        }
+        
+        /* --- SECTION CONTACT --- */
+        .contact {
+            padding: 120px 50px;
+            text-align: center;
+        }
+        
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact p {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 150px;
+        }
+        
+        button {
+            padding: 15px 30px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            align-self: flex-start;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            padding: 50px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .social-icons {
+            margin: 30px 0;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 15px;
+            color: #fff;
+            font-size: 20px;
+        }
+        
+        .footer-nav {
+            margin-bottom: 30px;
+        }
+        
+        .footer-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        .footer-nav ul li {
+            margin: 0 15px;
+        }
+        
+        .copyright {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px;
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .about, .contact {
+                padding: 80px 20px;
+            }
+            
+            .portfolio {
+                padding: 80px 10px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <header>
+        <div class="logo">MATHILDE</div>
+        <nav>
+            <ul>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Section Hero -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>ENGAGEANT ET DIFFÉRENT</h1>
+            <p>Photographie • Design • Art • Créativité</p>
+            <a href="#portfolio" class="btn">Découvrir mon travail</a>
+        </div>
+    </section>
+    
+    <!-- Section À propos -->
+    <section id="about" class="about">
+        <h2 class="section-title">À propos</h2>
+        <div class="about-content">
+            <p>Entre liquide et lumière, une vision transcendée.
+
+            <p>Dans un monde où l’ordinaire se dissout dans l’imaginaire, Mathilde explore l’âme cachée des boissons. Photographe plasticienne, elle sublime cafés, infusions, élixirs et cocktails dans des mises en scène oniriques, où les couleurs flottent comme des prières liquides et les formes se réinventent sous l’effet de la lumière.
+
+            <p>Elle est disponible pour des projets collaboratifs, des commandes personnalisées et des sessions photo. N'hésitez pas à me contacter pour discuter de votre vision ou pour simplement échanger sur l'art et la créativité.</p>
+        </div>
+    </section>
+    
+    <!-- Section Portfolio -->
+    <section id="portfolio" class="portfolio">
+        <div class="portfolio-title">
+            <h2 class="section-title">Portfolio</h2>
+        </div>
+        <div class="portfolio-grid">
+            <!-- Projet 1 -->
+            <div class="portfolio-item">
+                <img src="caca1.jpg" alt="Projet 1">
+                <div class="portfolio-overlay">
+                    <h3>Wine shooting</h3>
+                    <p>dans un style futuriste</p>
+                </div>
+            </div>
+            
+            <!-- Projet 2 -->
+            <div class="portfolio-item">
+                <img src="caca2.jpg" alt="Projet 2">
+                <div class="portfolio-overlay">
+                    <h3>Spiritualité rebelle</h3>
+                    <p>repousser les limites d'un produit</p>
+                </div>
+            </div>
+            
+            <!-- Projet 3 -->
+            <div class="portfolio-item">
+                <img src="caca3.jpg" alt="Projet 3">
+                <div class="portfolio-overlay">
+                    <h3>Coquillages et crustacés</h3>
+                    <p>Capturer l'essence et l'émotion humaine</p>
+                </div>
+            </div>
+            
+            <!-- Projet 4 -->
+            <div class="portfolio-item">
+                <img src="caca4.jpg" alt="Projet 4">
+                <div class="portfolio-overlay">
+                    <h3>Plage et parasol</h3>
+                    <p>Étude des contrastes et des formes abstraites</p>
+                </div>
+            </div>
+            
+            <!-- Projet 5 -->
+            <div class="portfolio-item">
+                <img src="caca5.jpg" alt="Projet 5">
+                <div class="portfolio-overlay">
+                    <h3>S'imprégner du temps</h3>
+                    <p>Conceptions minimalistes d'objets quotidiens</p>
+                </div>
+            </div>
+            
+            <!-- Projet 6 -->
+            <div class="portfolio-item">
+                <img src="caca6.jpg" alt="Projet 6">
+                <div class="portfolio-overlay">
+                    <h3>Voyages & Découvertes</h3>
+                    <p>Récits visuels de cultures et de paysages lointains</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-content">
+            <p>Vous avez un projet en tête ou vous souhaitez simplement échanger sur l'art et la créativité ? N'hésitez pas à me contacter.</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" placeholder="Nom">
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Sujet">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Votre message"></textarea>
+                </div>
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+                <a href="#">Behance</a>
+            </div>
+            <nav class="footer-nav">
+                <ul>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                ©️ 2025 Laurie - Tous droits réservés
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
